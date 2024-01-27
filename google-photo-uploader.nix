@@ -1,9 +1,6 @@
-{ gomod2nix }:
-
 { config, lib, pkgs, ... }:
 
-let buildGoApplication = gomod2nix.packages."${pkgs.system}".buildGoApplication;
-in buildGoApplication rec {
+pkgs.lib.buildGoApplication rec {
   pname = "google-photo-uploader";
   version = "1.6.1";
 
