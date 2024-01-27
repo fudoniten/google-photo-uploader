@@ -1,7 +1,7 @@
 { pkgs, lib, ... }:
 
 with pkgs.lib;
-buildGoApplication rec {
+pkgs.buildGoApplication rec {
   pname = "google-photo-uploader";
   version = "1.6.1";
 
