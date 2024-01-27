@@ -10,20 +10,14 @@
   outputs = { self, gomod2nix, nixpkgs, utils, ... }:
     utils.eachDefaultSystem (system:
       let
-        pkgs = import nixpkgs {
-          inherit system;
-          overlays = [
-            (self: super: {
-              buildGoApplication =
-                gomod2nix.packages."${system}".buildGoApplication;
-            })
-          ];
-        };
+        inherit (gomod2nix.legacyPackages."${system}") buildGoApplication;
+        inherit (nixpkgs) lib;
       in {
         packages = rec {
           default = google-photo-uploader;
-          google-photo-uploader =
-            pkgs.callPackage ./google-photo-uploader.nix { };
+          google-photo-uploader = import ./google-photo-uploader.nix {
+            inherit lib buildGoApplication;
+          };
         };
       });
 }

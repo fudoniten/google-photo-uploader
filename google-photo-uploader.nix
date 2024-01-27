@@ -1,10 +1,10 @@
-{ config, lib, pkgs, ... }:
+{ lib, buildGoApplication, ... }:
 
-pkgs.lib.buildGoApplication rec {
+buildGoApplication rec {
   pname = "google-photo-uploader";
   version = "1.6.1";
 
-  src = pkgs.fetchFromGitHub {
+  src = lib.fetchFromGitHub {
     owner = "int128";
     repo = "gpup";
     rev = version;
@@ -13,7 +13,7 @@ pkgs.lib.buildGoApplication rec {
 
   modules = ./gomod2nix.toml;
 
-  meta = with pkgs.lib; {
+  meta = with lib; {
     description = "Google photos uploader, written in Go.";
     homepage = "https://github.com/int128/gpup";
     license = licenses.asl20;
