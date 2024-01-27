@@ -8,7 +8,7 @@
   };
 
   outputs = { self, gomod2nix, nixpkgs, utils, ... }:
-    utils.eachDefaultSystem (system:
+    utils.lib.eachDefaultSystem (system:
       let
         inherit (gomod2nix.legacyPackages."${system}") buildGoApplication;
         inherit (nixpkgs) lib;
